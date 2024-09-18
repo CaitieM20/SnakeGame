@@ -139,6 +139,8 @@ function displayGameOver() {
     ctx.fillText('Press Space to Restart', canvas.width / 2, canvas.height / 2 + 80);
 }
 
+let gameLoopTimeout;
+
 function resetGame() {
     snake = new Snake();
     fruit = new Fruit();
@@ -146,11 +148,21 @@ function resetGame() {
     score = 0;
     gameOver = false;
     scoreDisplay.textContent = `Score: ${score}`;
+    
+    // Clear any existing game loop
+    if (gameLoopTimeout) {
+        clearTimeout(gameLoopTimeout);
+    }
+    
+    // Start a new game loop
+    gameLoop();
 }
 
 document.addEventListener('keydown', (event) => {
-    const direction = event.key.replace('Arrow', '');
-    snake.changeDirection(direction);
+    if (!gameOver) {
+        const direction = event.key.replace('Arrow', '');
+        snake.changeDirection(direction);
+    }
 
     if (event.code === 'Space' && gameOver) {
         resetGame();
@@ -172,9 +184,8 @@ function gameLoop() {
     if (gameOver) {
         displayGameOver();
     } else {
-        setTimeout(gameLoop, 100); // Adjust this value to change game speed
+        gameLoopTimeout = setTimeout(gameLoop, 100); // Adjust this value to change game speed
     }
 }
 
-resetGame();
-gameLoop();
+resetGame(); // Initial game start
