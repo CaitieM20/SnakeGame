@@ -1,19 +1,39 @@
 body, html {
-    height: 100%;
+    height: 100vh;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #000;
+    font-family: Arial, sans-serif;
 }
 
 #gameArea {
     width: 400px;
     height: 400px;
     background-color: #fff;
+    text-align: center;
+    --grid-color: #e0e0e0;
+    --snake-color: #4CAF50;
+    --fruit-color: #FF5722;
 }
 
 canvas {
     display: block;
     background-color: #000;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+#scoreDisplay {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#gameCanvas {
+    border: 2px solid black;
+    background-color: #f0f0f0;
 }
