@@ -16,6 +16,10 @@ const computedStyle = getComputedStyle(document.getElementById('gameArea'));
 canvas.style.border = '2px solid black';
 
 let snake;
+let fruit;
+let score = 0;
+
+const scoreDisplay = document.getElementById('scoreDisplay');
 
 (function setup() {
     snake = new Snake();
@@ -119,6 +123,8 @@ function Snake() {
     this.eat = function(fruit) {
         if (this.x === fruit.x && this.y === fruit.y) {
             this.total++;
+            score += 10;
+            scoreDisplay.textContent = `Score: ${score}`;
             return true;
         }
 
