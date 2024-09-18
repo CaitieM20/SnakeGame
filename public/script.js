@@ -1,9 +1,19 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-const scale = 10;
-const rows = canvas.height / scale;
-const columns = canvas.width / scale;
+const canvasSize = 400; // Set a fixed size for the square canvas
+const scale = 20; // Increased scale for better visibility
+const rows = canvasSize / scale;
+const columns = canvasSize / scale;
+
+canvas.width = canvasSize;
+canvas.height = canvasSize;
+
+// Get computed styles
+const computedStyle = getComputedStyle(document.getElementById('gameArea'));
+
+// Add a border to the canvas
+canvas.style.border = '2px solid black';
 
 let snake;
 
@@ -41,7 +51,7 @@ function Snake() {
     this.tail = [];
 
     this.draw = function() {
-        ctx.fillStyle = "#FFFFFF";
+        ctx.fillStyle = computedStyle.getPropertyValue('--snake-color').trim();
 
         for (let i=0; i<this.tail.length; i++) {
             ctx.fillRect(this.tail[i].x, this.tail[i].y, scale, scale);
@@ -60,20 +70,20 @@ function Snake() {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
 
-        if (this.x >= canvas.width) {
+        if (this.x >= canvasSize) {
             this.x = 0;
         }
 
-        if (this.y >= canvas.height) {
+        if (this.y >= canvasSize) {
             this.y = 0;
         }
 
         if (this.x < 0) {
-            this.x = canvas.width - scale;
+            this.x = canvasSize - scale;
         }
 
         if (this.y < 0) {
-            this.y = canvas.height - scale;
+            this.y = canvasSize - scale;
         }
     };
 
@@ -130,12 +140,12 @@ function Fruit() {
     this.y;
 
     this.pickLocation = function() {
-        this.x = (Math.floor(Math.random() * columns - 1) + 1) * scale;
-        this.y = (Math.floor(Math.random() * rows - 1) + 1) * scale;
+        this.x = (Math.floor(Math.random() * columns)) * scale;
+        this.y = (Math.floor(Math.random() * rows)) * scale;
     };
 
     this.draw = function() {
-        ctx.fillStyle = "#FF0000";
+        ctx.fillStyle = computedStyle.getPropertyValue('--fruit-color').trim();
         ctx.fillRect(this.x, this.y, scale, scale);
     };
 }
