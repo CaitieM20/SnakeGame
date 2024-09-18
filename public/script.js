@@ -1,7 +1,9 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-const scale = 10;
+const scale = 20;
+canvas.width = 400;
+canvas.height = 400;
 const rows = canvas.height / scale;
 const columns = canvas.width / scale;
 
@@ -41,7 +43,7 @@ function Snake() {
     this.tail = [];
 
     this.draw = function() {
-        ctx.fillStyle = "#FFFFFF";
+        ctx.fillStyle = "green";
 
         for (let i=0; i<this.tail.length; i++) {
             ctx.fillRect(this.tail[i].x, this.tail[i].y, scale, scale);
@@ -135,7 +137,7 @@ function Fruit() {
     };
 
     this.draw = function() {
-        ctx.fillStyle = "#FF0000";
+        ctx.fillStyle = "red";
         ctx.fillRect(this.x, this.y, scale, scale);
     };
 }
