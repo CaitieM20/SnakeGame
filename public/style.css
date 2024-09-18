@@ -21,7 +21,3 @@ body, html {
     --fruit-color: #FF5722;
 }
 
-canvas {
-    display: block;
-    background-color: #000;
-}
